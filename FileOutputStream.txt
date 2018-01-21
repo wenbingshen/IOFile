@@ -1,0 +1,50 @@
+package cn.itcast.demo1;
+
+import java.io.FileOutputStream;
+import java.io.IOException;
+
+/*
+ * 	FileOutputStream 类的使用：将内容写入D盘www目录下abc.txt文件
+ */
+
+public class FileOutputStreamDemo {
+
+	public static void main(String[] args) {
+		// TODO 自动生成的方法存根
+		FileOutputStreamDemo fosd = new FileOutputStreamDemo();
+		//电脑d盘www目录下的abc.txt文档；
+		String filePath = "D://www/abc.txt";
+		
+		//定义一个String变量接收要写入的内容;
+		//通过该类对象调用方法将内容写入文档;
+		String content = "今天是2018年/1月21日,天气一般般，下午刚打完球回来";
+		fosd.writeFile(filePath, content);
+		
+	}
+
+	public void writeFile(String filePath, String content) {
+		// 声明一个输出流对象；
+		FileOutputStream fos = null;
+		try {
+			// 1. 根据文件路径创建输出流
+			fos = new FileOutputStream(filePath);
+
+			// 2. 把string转换为byte数组，把要写入的内容转为字节存储在byte数组里面;
+			byte[] array = content.getBytes();
+
+			// 3. 把byte数组输出;
+			fos.write(array);
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		} finally {
+			if (fos != null) {
+				try {
+					fos.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+	}
+}
